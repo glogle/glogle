@@ -54,12 +54,35 @@ exports.cssLoaders = function (options) {
       return ['vue-style-loader'].concat(loaders)
     }
   }
+  
+function lessResourceLoader() { // 增加全局使用less函数
+  var loaders = [
+    cssLoader,
+    'less-loader',
+    {
+      loader: 'sass-resources-loader',
+      options: {
+        resources: [
+          path.resolve(__dirname, '../src/style/common.less'), //定义全局变量的文件路径
+        ]
+      }
+    }
+  ];
+  if (options.extract) {
+    return ExtractTextPlugin.extract({
+      use: loaders,
+      fallback: 'vue-style-loader'
+    })
+  } else {
+    return ['vue-style-loader'].concat(loaders)
+  }
+}
 
   // https://vue-loader.vuejs.org/en/configurations/extract-css.html
   return {
     css: generateLoaders(),
     postcss: generateLoaders(),
-    less: generateLoaders('less'),
+    less: lessResourceLoader(),
     sass: generateLoaders('sass', { indentedSyntax: true }),
     scss: generateLoaders('sass'),
     stylus: generateLoaders('stylus'),
