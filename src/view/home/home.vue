@@ -1,5 +1,6 @@
 <template>
-<div class="homePage">
+<div class="homePage" :style="{minHeight:winHeight+'px'}">
+  <div class="bannerBox">
     <swiper :options="swiperOption">
       <swiper-slide v-for="(item, index) in swiperSlides" :key="index">
         <div class="viewItem" :style="{backgroundColor:item.color}">
@@ -13,12 +14,14 @@
           <div class="swiper-scrollbar"   slot="scrollbar"></div>
       </div>
     </swiper>
+  </div>
 </div>
 </template>
 
 <script>
   export default {
     name: 'homePage',
+    props:['winWidth','winHeight'],
     data() {
       return {
         swiperOption: {
@@ -29,23 +32,24 @@
         swiperSlides: [
           {
             id: '001',
-            color: 'red',
+            color: '#eee',
             img:''
           },{
             id: '002',
-            color: '#ff0',
+            color: '#eee',
             img:''
           },{
             id: '003',
-            color: 'blue',
+            color: '#eee',
             img:''
           }
         ]
       }
     },
     mounted() {
+      
       setInterval(() => {
-        if (this.swiperSlides.length < 10) {
+        if (this.swiperSlides.length < this.swiperSlides.length) {
           this.swiperSlides.push(this.swiperSlides.length + 1)
         }
       }, 3000)
@@ -56,9 +60,15 @@
 <style lang="less">
     .homePage {
       width: 100%;
-      .viewItem{
-        width: 100%;
-        height: 450px;
+      background-color: #aaa;
+      .bannerBox{
+          padding: 20px 0;
+        .viewItem{
+          // width: 100%;
+          height: 450px;
+          border-radius: 10px;
+          margin: 0 20px;
+        }
       }
     }
 </style>

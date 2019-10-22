@@ -1,12 +1,30 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view :winWidth="winWidth" :winHeight="winHeight"/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data() {
+    return {
+      winWidth:'',
+      winHeight:'',
+      
+    }
+  },
+  methods: {
+    getWindeowSize:function(){
+      this.winWidth = document.body.scrollWidth; // 网页正文全文宽
+      this.winHeight =  document.body.scrollHeight; //网页正文全文高
+    }
+
+  },
+  created(){
+    this.getWindeowSize()
+    console.log(this.winWidth,this.winHeight)
+  }
 }
 </script>
 
