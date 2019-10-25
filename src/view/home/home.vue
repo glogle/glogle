@@ -1,9 +1,9 @@
 <template>
-<div class="homePage" :style="{minHeight:winHeight+'px'}">
+<div class="homePage" :style="{minHeight:winHeight+'px',backgroundImage:'url(' + bgImg2 + ')',}">
   <div class="bannerBox">
     <swiper :options="swiperOption">
       <swiper-slide v-for="(item, index) in swiperSlides" :key="index">
-        <div class="viewItem" :style="{backgroundColor:item.color}">
+        <div class="viewItem">
           {{item.index}}
         </div>
       </swiper-slide>
@@ -24,6 +24,7 @@
     props:['winWidth','winHeight'],
     data() {
       return {
+        bgImg2: require('@/assets/images/background/bgImg2.jpg'),
         swiperOption: {
           pagination: {
             el: '.swiper-pagination',
@@ -60,11 +61,12 @@
 <style lang="less">
     .homePage {
       width: 100%;
-      background-color: #aaa;
+      background-repeat:'no-repeat';
+      background-size:'100% 100%';
       .bannerBox{
           padding: 20px 0;
         .viewItem{
-          // width: 100%;
+          background-color: rgba(0, 0, 0, 0.226);
           height: 450px;
           border-radius: 10px;
           margin: 0 20px;
